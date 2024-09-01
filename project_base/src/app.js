@@ -56,6 +56,7 @@ import Body from "./components/body.js"
 //         </div>
 //     );
 // }; now header component is not in this file , because we have made seperate file for that so so we have to import header file here , so that applayout  file can run that code before import , we need to export it first from header file 
+
 // const Res_list=[
 //     {
 //       "info": {
