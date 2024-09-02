@@ -34,10 +34,15 @@
 // root.render(<applayout></applayout>)
 
 
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React from "react"
+import ReactDOM from "react-dom/client"
 import Hader from "./components/Peader.js"
 import Body from "./components/body.js"
+import About from "./components/about.js"
+import Contact from "./components/contact.js"
+import Error from "./components/error.js"
+import { createBrowserRouter, RouterProvider } from "react-router-dom";// this cbr will create ro;uting config for us ,  we are creating routing config inside a variable approuter 
+// config means some info , taht is telling browser router , that whats happeing on that path eg on calling /about => will lead us to about page so this cbr takes a list of paths , paths are object and object will contain 2 things path (way to access that element )and element describing the page or destination we are going through that path , hence cbr is containing arrays of objects , while those objects having path and element , which path will lead to , thats how cbr do routng configuration ( some info telling about specific route)
 
 // const Header = () => {// will have  header component here 
 //     return (
@@ -1016,6 +1021,24 @@ const AppLayout = () => {
         </div>
     );
 };// it will contain all components ,its a container
+const approuter =createBrowserRouter([
+    {
+        path:"/",
+        element: <AppLayout/>,
+        errorElement:<Error/>// here we can give our error page , whatever we want to display during error 
 
+    },
+    {
+        path:"/about",
+       element:<About/>,
+    },
+    {
+path :"/contact",
+element :<Contact/>
+    },
+]);// this is how we give configuration , if this is path  , this element is page that will load 
+// now we have pass/provide this config to render it , for that we will take router provider , this will provide routing config to our app/ website , earlier we were rendering app loayout direct ly, but now we will provide routerconfig via router provider , now we will import router provider component from router dom library , then 
+// what if we are using random url , then error will coming , but not defining which kind of error is that , its just showing unexpected errpr  => this is handled by react , but we can create our own error page using react router dom 
 const root = ReactDOM.createRoot(document.getElementById("cid"));
-root.render(<AppLayout />);
+root.render(<RouterProvider router={approuter} />);
+//there are other router also , other than crate browser router 

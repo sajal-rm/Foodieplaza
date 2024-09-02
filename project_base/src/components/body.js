@@ -24,6 +24,7 @@ import { useState , useEffect} from "react"//utility function
 // diff algo finds out the previous virtual dom and updated virtual dom let say previuos one was having 7 react elem, new ones are 3 react ele 
 // how diff algo works => react will first find out the difference between updated and previous objects (important to note down ) , here in diff algo , react  will check out the difference btween updated and previous  OBJECT then actually updates the dom with new uppdated element. react is constantly checking if there is any changes inside react 
 const Body=()=>{
+  //try to keep all use state varaiale just in initial of the component and always define use state inside component , dont use it outside component (other wiseit will give err) try to avoid define state varaible inside function , if in order to avoid  incosistency 
   //state variable (super pwerful variable)=>to be superpowerful we have made hooks  (use state is a hooks) hook is a normal js function given by react,hooks are use effect and use state
   //hooks are utility functions 
   // use state => utility function
@@ -63,6 +64,7 @@ useEffect(()=> {
   fetchedata();
   console.log("use effect called")
 },[])// use effect is called after body has renderend once , then api will load then again will do rendering so basically use effect is called after rendering once, then only call back fucn of use effect is executed
+//if we are using nothing in place of dependency array then use effect will execute each time , when body renders , while with empty array as dependency shows that use effect will only execute afer initial body render only, after this if body renders , use effect won't renders , while with something in dependency array shows use effect will render only when that element present in  dependency array will change each time that element change then each time use effect will executed 
 console.log("i am first")
 const fetchedata=async ()=>{
   const data=await fetch("https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
