@@ -72,3 +72,12 @@ border:1px solid black;
 .search_box{
     padding-right:5px;
 }
+.menu{
+    color:black;
+}
+.menu h1{
+    text-align: center;
+}
+.menu h2{
+    text-align: center;
+}

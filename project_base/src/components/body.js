@@ -3,6 +3,7 @@ import Shimmer from "./shimmer.js"
 import Res_card from "./Restaurent_card.js"
 // import Res_list from "../utils/mock_data"
 import { useState , useEffect} from "react"//utility function 
+import { Link } from "react-router-dom"
 //whenver a state variable changes , react rerendering our componene, as state variable changes(updates) body component quicly will get updated (this is superpowe of hooks(state variable)).
 // on click of button , react quickly updates ui , hence whenver state variable updates , react will rerender our component, react will keep my data layer in sync with user interface 
 // const [listofRest]=useState() thats how we create a state variable by react 
@@ -131,7 +132,7 @@ const fetchedata=async ()=>{
                {console.log(make_change)}
                {make_change.map((restaurant,index) => (
               // {console.log(restaurant)}
-               <Res_card res_data={restaurant} key={index}/>
+               <Link to ={"/restaurant/"+ restaurant.info.id}><Res_card res_data={restaurant} key={index}/></Link>
                  ))} 
 
                </div>

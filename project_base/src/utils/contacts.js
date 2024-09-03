@@ -7,3 +7,8 @@ export const CDN_URL="https://media-assets.swiggy.com/swiggy/image/upload/fl_los
 // we will simply add "export" infront of the file we want to export 
 // export default LOGO_URL
 // we can't perform  export method in a file 
+
+
+
+export const menu="https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.406498&lng=78.47724389999999&restaurantId=" 
+export const bend="&catalog_qa=undefined&submitAction=ENTER"
