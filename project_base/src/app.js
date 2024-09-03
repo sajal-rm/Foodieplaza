@@ -41,7 +41,9 @@ import Body from "./components/body.js"
 import About from "./components/about.js"
 import Contact from "./components/contact.js"
 import Error from "./components/error.js"
-import { createBrowserRouter, RouterProvider } from "react-router-dom";// this cbr will create ro;uting config for us ,  we are creating routing config inside a variable approuter 
+import Rest_menu from "./components/rest_menu.js"
+import { createBrowserRouter, RouterProvider,Outlet } from "react-router-dom";// this cbr will create ro;uting config for us ,  we are creating routing config inside a variable approuter 
+import Rest_menu from "./components/rest_menu.js"
 // config means some info , taht is telling browser router , that whats happeing on that path eg on calling /about => will lead us to about page so this cbr takes a list of paths , paths are object and object will contain 2 things path (way to access that element )and element describing the page or destination we are going through that path , hence cbr is containing arrays of objects , while those objects having path and element , which path will lead to , thats how cbr do routng configuration ( some info telling about specific route)
 
 // const Header = () => {// will have  header component here 
@@ -1015,7 +1017,8 @@ const AppLayout = () => {
     return (//add different components here in return 
         <div className="app">
             <Hader />
-            <Body/>
+            <Outlet/>
+            {/* out let is like a tunnel all chilren according to the routes and come over on display  */}
 
 
         </div>
@@ -1025,17 +1028,28 @@ const approuter =createBrowserRouter([
     {
         path:"/",
         element: <AppLayout/>,
+        children:[// here these are the children component and path correspondingly of applayout parent , we want to display body ,if path is "/" . if path is "/about" the show about component ,,if path is "/contact" then contact should be shown , hence we need to push child according to our rout , means as per path we wil send correspoinding child ,now what do we send in applayout component other than header , we will have outlet ,which will keep value of component on every path change as per the path of that component 
+            {//outlet will be filled with children according to path we have 
+                path: "/",
+                element :<Body/>
+            },
+            {
+                path:"/about",
+               element:<About/>
+            },
+            {
+        path :"/contact",
+        element :<Contact/>
+            },
+            {
+                path:"/restaurant/:resId",// : representing that resId is dynamic with each new restaurant resId is unique and new route with each diff resaturant
+                element: <Rest_menu/>
+            }
+        ],
         errorElement:<Error/>// here we can give our error page , whatever we want to display during error 
 
     },
-    {
-        path:"/about",
-       element:<About/>,
-    },
-    {
-path :"/contact",
-element :<Contact/>
-    },
+    //here when we are not using outlet , we dont have header component with about,contact , home etc... , so we will do something such that header component will be as there , but body component will change (dynamic) as per click or need for that we comeup with concept of children routes with the help of this header is remain undistrubed while children routes will kepp . first , these will be made children routees(about, body, contact,home etc... ) different path will lead to different component defined in the children component and these
 ]);// this is how we give configuration , if this is path  , this element is page that will load 
 // now we have pass/provide this config to render it , for that we will take router provider , this will provide routing config to our app/ website , earlier we were rendering app loayout direct ly, but now we will provide routerconfig via router provider , now we will import router provider component from router dom library , then 
 // what if we are using random url , then error will coming , but not defining which kind of error is that , its just showing unexpected errpr  => this is handled by react , but we can create our own error page using react router dom 

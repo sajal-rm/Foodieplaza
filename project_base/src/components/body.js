@@ -123,12 +123,14 @@ const fetchedata=async ()=>{
                 console.log("button clicked")
                 const flist=coco.filter((res)=>res.info.avgRating > 4.3);
                 console.log(flist)
-                 setcoco(flist);
+                 setmake_change(flist);
                 }}
                   > Top Rated Restaurants</button>
                 </div>
                <div className="res-cont">
+               {console.log(make_change)}
                {make_change.map((restaurant,index) => (
+              // {console.log(restaurant)}
                <Res_card res_data={restaurant} key={index}/>
                  ))} 
 
