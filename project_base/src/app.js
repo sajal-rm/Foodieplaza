@@ -34,7 +34,7 @@
 // root.render(<applayout></applayout>)
 
 
-import React from "react"
+import React ,{lazy,Suspense} from "react"
 import ReactDOM from "react-dom/client"
 import Hader from "./components/Peader.js"
 import Body from "./components/body.js"
@@ -44,6 +44,22 @@ import Error from "./components/error.js"
 import Rest_menu from "./components/rest_menu.js"
 import { createBrowserRouter, RouterProvider,Outlet } from "react-router-dom";// this cbr will create ro;uting config for us ,  we are creating routing config inside a variable approuter 
 import Rest_menu from "./components/rest_menu.js"
+// import Grocery from "./components/grocery.js"
+
+
+
+
+//chunking, dynamic loading , laxy loading , on demand laoding code splitting 
+const Grocery=lazy(()=>import("./components/grocery.js"))//in lazy loading it wont import directly by provious method , now  it will import using chunking or lazy loading (same name). Here in this there will be lazy function that will be taking a callback function and , in that call back func we will pass import with path ,
+
+// lazy loading is done , so that our dist (bundled folder) do not bundle folders that are not necessay to load at current scenario , those will be needed only at different scenario, like in ixigo app(different mode of travels like train , bus , flight ) when this contion comes ,when we need to only one mode ontravel then why to bundle files of other component in dist file ,hence we do make seperate bundled file for different modes to avoid unnecessary loading ,since 1 dist file should not be that much heavy hence split bundled files to avoid unnecessary loading  
+// a new bundlerd files is added in dist folder for grocery but just making seperate file does not makes our job done , bcoz on clicking grocey on header, web page not showing expected result the reason is we are going to grocery on demand ,on click ,that react want data of grocery on click ,but since we dont have bundled file of grocery so it will take sometime to fetch taht file , but react is very , in that time react can't load grocery data , so thrown error because react tries to render grocery but its not there   
+// so in order to aboid that error we are using suspense  component, which comes from react library , so in lazy laoding use suspense components , inthis we can wrap our expected compoenent in it ,and gives a fallback  fucntion which will render something until we dont have grocery bundled file 
+// we will not path like olden way , this time path is given like  
+
+
+
+
 // config means some info , taht is telling browser router , that whats happeing on that path eg on calling /about => will lead us to about page so this cbr takes a list of paths , paths are object and object will contain 2 things path (way to access that element )and element describing the page or destination we are going through that path , hence cbr is containing arrays of objects , while those objects having path and element , which path will lead to , thats how cbr do routng configuration ( some info telling about specific route)
 
 // const Header = () => {// will have  header component here 
@@ -1042,6 +1058,10 @@ const approuter =createBrowserRouter([
         element :<Contact/>
             },
             {
+                path :"/grocery",
+                element :<Suspense fallback ={(<h1>loading...</h1>)}><Grocery/></Suspense>
+                    },
+            {
                 path:"/restaurant/:resId",// : representing that resId is dynamic with each new restaurant resId is unique and new route with each diff resaturant
                 element: <Rest_menu/>
             }
@@ -1053,6 +1073,6 @@ const approuter =createBrowserRouter([
 ]);// this is how we give configuration , if this is path  , this element is page that will load 
 // now we have pass/provide this config to render it , for that we will take router provider , this will provide routing config to our app/ website , earlier we were rendering app loayout direct ly, but now we will provide routerconfig via router provider , now we will import router provider component from router dom library , then 
 // what if we are using random url , then error will coming , but not defining which kind of error is that , its just showing unexpected errpr  => this is handled by react , but we can create our own error page using react router dom 
-const root = ReactDOM.createRoot(document.getElementById("cid"));
+const root = ReactDOM.createRoot( document.getElementById("cid"));
 root.render(<RouterProvider router={approuter} />);
 //there are other router also , other than crate browser router 
