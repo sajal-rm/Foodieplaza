@@ -2,6 +2,7 @@
 import Shimmer from "./shimmer.js"
 import Res_card from "./Restaurent_card.js"
 // import Res_list from "../utils/mock_data"
+import useonlinestatus from "../utils/useOnlinestatus.js" 
 import { useState , useEffect} from "react"//utility function 
 import { Link } from "react-router-dom"
 //whenver a state variable changes , react rerendering our componene, as state variable changes(updates) body component quicly will get updated (this is superpowe of hooks(state variable)).
@@ -103,7 +104,11 @@ const fetchedata=async ()=>{
 //   // return <h1>loading...</h1>
 // }
 // const [filtered,setfiltered]=useState()
-
+const onlinestatus=useonlinestatus();
+if(onlinestatus===false) {return (<div>
+  <h1>Looks like u'r offline  </h1>
+  <h2>check ur internet connection </h2>
+</div>)}
     return coco.length===0 ? (<Shimmer />): (
                   <div className="body">
                  <div className="filter">

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import {LOGO_URL} from "../utils/contacts.js"
 import {Link} from "react-router-dom"
+import useonlinestatus from "../utils/useOnlinestatus.js";
 const Hader = () => {// will have  header component here 
     const [btn_name,setbtn_name]=useState("login");
+    const onlinestatus=useonlinestatus();// its a custom hooks defined in utis , by same useonlinestatus.js name , it will display whether website is offline or online 
     return (
         <div className="header">
             <div>
@@ -10,6 +12,10 @@ const Hader = () => {// will have  header component here
              </div>
              <div id="nav_items">
                 <ul id="list">
+                    <li>
+                        online status:{onlinestatus ?  "\u{1F7E2}":"\u{1F534}" }
+
+                    </li>
                     <li><Link to ="/">Home</Link></li>
                     <li><Link to ="/about">About us</Link></li>
                     <li><Link to ="/contact">Contact us</Link></li>

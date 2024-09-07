@@ -81,3 +81,7 @@ border:1px solid black;
 .menu h2{
     text-align: center;
 }
+.user-card{
+    padding: 10px;
+    border: 1px solid black;
+}
