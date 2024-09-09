@@ -111,12 +111,12 @@ if(onlinestatus===false) {return (<div>
 </div>)}
     return coco.length===0 ? (<Shimmer />): (
                   <div className="body">
-                 <div className="filter">
-                 <div className="search">
-                  <input type="text" className="search_box"  value={src_bar} onChange={(e)=>{
+                 <div className="filter flex justify-between">
+                 <div className="search m-4 ">
+                  <input type="text" className="search_box border border-solid border-black px-2 py-1 m-2"  value={src_bar} onChange={(e)=>{
                     setsrc_bar(e.target.value)
                   }}/>
-                  <button className="butts" onClick={()=>{
+                  <button className="butts rounded-lg px-4 bg-green-100 py-1" onClick={()=>{
                     // setsrc_bar(e.target.value)
                     const filtered=coco.filter((res)=> { return res.info.name.toLowerCase().includes(src_bar.toLowerCase())})
                     setmake_change(filtered)
@@ -124,7 +124,7 @@ if(onlinestatus===false) {return (<div>
                     // console.log(coco.length," ",src_bar)  
                   }}>search</button>
                 </div>
-               <button className="filter-btn" 
+               <button className="filter-btn bg-gray-300 my-4 px-1 mr-2 rounded-lg" 
                onClick={()=>{
                 console.log("button clicked")
                 const flist=coco.filter((res)=>res.info.avgRating > 4.3);
@@ -133,7 +133,7 @@ if(onlinestatus===false) {return (<div>
                 }}
                   > Top Rated Restaurants</button>
                 </div>
-               <div className="res-cont">
+               <div className="res-cont flex flex-wrap  ">
                {console.log(make_change)}
                {make_change.map((restaurant,index) => (
               // {console.log(restaurant)}
